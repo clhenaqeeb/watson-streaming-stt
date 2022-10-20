@@ -42,7 +42,7 @@ LAST = None
 
 REGION_MAP = {
     'us-east': 'gateway-wdc.watsonplatform.net',
-    'us-south': 'stream.watsonplatform.net',
+    'us-south': 'api.us-south.speech-to-text.watson.cloud.ibm.com/instances/b2d28d29-ad07-45b7-acb8-0a227bf19d7b',
     'eu-gb': 'stream.watsonplatform.net',
     'eu-de': 'stream-fra.watsonplatform.net',
     'au-syd': 'gateway-syd.watsonplatform.net',
@@ -171,8 +171,8 @@ def get_url():
     # for details on which endpoints are for each region.
     region = config.get('auth', 'region')
     host = REGION_MAP[region]
-    return ("wss://{}/speech-to-text/api/v1/recognize"
-           "?model=en-US_BroadbandModel").format(host)
+    return ("wss://{}/v1/recognize"
+           "?model=en-US_BroadbandModel&speaker_labels=true").format(host)
 
 def get_auth():
     config = configparser.RawConfigParser()
@@ -183,7 +183,7 @@ def get_auth():
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='Transcribe Watson text in real time')
+    description='Transcribe Watson text in real time')
     parser.add_argument('-t', '--timeout', type=int, default=5)
     # parser.add_argument('-d', '--device')
     # parser.add_argument('-v', '--verbose', action='store_true')
